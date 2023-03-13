@@ -16,5 +16,5 @@
 
 **GitHub**
 
-* [Ссылка на GitHub]https://messaiina.github.io/mesto/
+* [Ссылка на GitHub](https://messaiina.github.io/mesto/)
 
