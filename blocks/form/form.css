@@ -10,14 +10,14 @@
 }
 
 @media screen and (max-width: 767px) {
-    .form {
+	.form {
 		gap: 45px;
-        padding: 25px 22px;
-    }
+		padding: 25px 22px;
+	}
 }
 
 @media screen and (max-width: 470px) {
-    .form {
+	.form {
 		max-width: 282px;
-    }
+	}
 }

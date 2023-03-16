@@ -1,0 +1,21 @@
+.icon{
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+.icon::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.icon.icon-with-white-border {
+    border: 1px solid #fff;
+}
+.icon.edit-icon::before {
+    background-image: url(../../images/Edit-Button.svg);
+    background-position: center;
+}

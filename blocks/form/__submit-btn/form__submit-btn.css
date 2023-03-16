@@ -10,13 +10,13 @@
 }
 
 .form__submit-btn:hover {
-	opacity: .8;
+	background: rgba(0, 0, 0, 0.8);
 	cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
-    .form__submit-btn {
+	.form__submit-btn {
 		font-size: 14px;
 		line-height: 17px;
-    }
+	}
 }
