@@ -2,7 +2,7 @@
 	display: grid;
     grid-column: 3;
     align-self: center;
-    margin: 0 0 0 18px;
+    margin-left: 18px;
 	transition: opacity .3s;
     width: 24px;
     height: 24px;
