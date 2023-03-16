@@ -6,7 +6,7 @@
         flex-flow: row wrap;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 930px) {
 	.profile {
 		flex-direction: column;
 		margin-top: 42px;
