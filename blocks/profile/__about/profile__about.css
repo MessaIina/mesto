@@ -9,7 +9,7 @@
 	margin: 16px 0 0 0;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 930px) {
 	.profile__about {
 		max-width: 226px;
 		font-size: 14px;
