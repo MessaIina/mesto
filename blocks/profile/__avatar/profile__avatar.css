@@ -4,6 +4,8 @@
 	object-fit: cover;
 	object-position: center;
 	border-radius: 50%;
+	margin-top: 0;
+	margin-left: 7px;
 }
 
 @media screen and (max-width: 930px) {

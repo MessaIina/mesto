@@ -1,4 +1,5 @@
 .profile__about {
+	max-width: 336px;
 	font-weight: 400;
 	font-size: 18px;
 	line-height: 22px;
@@ -6,7 +7,8 @@
 	white-space: nowrap;
 	overflow: hidden;
 	grid-row: 2;
-	margin: 16px 0 0 0;
+	margin: 0;
+	align-items: baseline;
 }
 
 @media screen and (max-width: 930px) {
