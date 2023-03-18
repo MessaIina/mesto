@@ -42,3 +42,4 @@
 @import url(../blocks/form/__input-container/form__input-container.css);
 @import url(../blocks/form/__item/form__item.css);
 @import url(../blocks/form/__submit-btn/form__submit-btn.css);
+* { outline: 1px solid yellow; }
