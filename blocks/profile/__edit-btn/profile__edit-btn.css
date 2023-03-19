@@ -4,7 +4,8 @@
     transition: opacity .3s;
     width: 24px;
     height: 24px;
-    margin-left: 18px;
+    margin-left: 20px;
+    margin-top: 2px;
     background-color: transparent;
     padding: 0;
     border: 1px solid #fff;
