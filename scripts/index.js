@@ -14,33 +14,6 @@ const cardLink = addForm.querySelector('#link');
 const imagePopup = document.querySelector('.image-popup');
 const cardImage = imagePopup.querySelector('.card-zoom__image');
 const cardCaption = imagePopup.querySelector('.card-zoom__caption');
-const initialCards = [
-	{
-	  name: 'Архыз',
-	  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-	},
-	{
-	  name: 'Челябинская область',
-	  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-	},
-	{
-	  name: 'Иваново',
-	  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-	},
-	{
-	  name: 'Камчатка',
-	  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-	},
-	{
-	  name: 'Холмогорский район',
-	  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-	},
-	{
-	  name: 'Байкал',
-	  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-	}
-  ]; 
-
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards__list');
   
@@ -62,7 +35,7 @@ function setLikeListener(card) {
 function setDeleteListener(card) {
 	const deleteCard = card.querySelector('.card__delete-btn');
 	deleteCard.addEventListener('click', () => {
-		deleteCard.closest('.card').remove();
+		card.remove();
 	});
 }
 
