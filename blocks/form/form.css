@@ -4,6 +4,7 @@
 	flex-direction: column;
 	gap: 48px;
 	max-width: 430px;
+	height: 330px;
 	padding: 34px 36px 37px;
 	background-color: #fff;
 	border-radius: 10px;
@@ -13,6 +14,7 @@
 	.form {
 		gap: 45px;
 		padding: 25px 22px;
+		height: 322px;
 	}
 }
 
