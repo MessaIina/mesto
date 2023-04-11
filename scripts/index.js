@@ -1,3 +1,4 @@
+const popups = document.querySelectorAll('.popup');
 const closeBtns = document.querySelectorAll('.popup__close-btn');
 const editBtn = document.querySelector('.profile__edit-btn');
 const profilePopup = document.querySelector('.profile-popup'); 
@@ -16,14 +17,34 @@ const cardImage = imagePopup.querySelector('.card-zoom__image');
 const cardCaption = imagePopup.querySelector('.card-zoom__caption');
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsList = document.querySelector('.cards__list');
-  
+
+function closePopupWhenPressEsc(evt) {
+	if (evt.key === 'Escape') {
+	  const openedPopup = document.querySelector('.popup_opened');
+	  closePopup(openedPopup);
+	}
+  }
+
 function openPopup(popup) { 
+	document.addEventListener('keydown', closePopupWhenPressEsc);
 	popup.classList.add('popup_opened'); 
 }
   
 function closePopup(popup) { 
+	document.removeEventListener('keydown', closePopupWhenPressEsc);
 	popup.classList.remove('popup_opened');
 }
+
+popups.forEach((popup) =>
+  popup.addEventListener('mousedown', (evt) => {
+    if (
+      evt.target.classList.contains('popup') ||
+      evt.target.classList.contains('popup__close-btn')
+    ) {
+      closePopup(popup);
+    }
+  })
+);
 
 function setLikeListener(card) {
 	const cardLike = card.querySelector('.card__like-btn');

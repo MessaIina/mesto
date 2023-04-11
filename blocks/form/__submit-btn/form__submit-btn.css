@@ -7,10 +7,12 @@
 	font-weight: 400;
 	font-size: 18px;
 	line-height: 22px;
+	margin-top: -30px;
+	transition: opacity 0.2s ease-out;
 }
 
 .form__submit-btn:hover {
-	background: rgba(0, 0, 0, 0.8);
+	opacity: 0.8;
 	cursor: pointer;
 }
 
