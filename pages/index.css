@@ -51,4 +51,4 @@
 
 @import url(../blocks/card-zoom/card-zoom.css);
 @import url(../blocks/card-zoom/__caption/card-zoom__caption.css);
-@import url(../blocks/card-zoom/image/card-zoom__image.css);
+@import url(../blocks/card-zoom/__image/card-zoom__image.css);
