@@ -18,7 +18,13 @@ const cardCaption = imagePopup.querySelector('.card-zoom__caption');
 const cardTemplate = document.querySelector('#card-template').content; 
 const cardsList = document.querySelector('.cards__list');
  
-
+function resetForm(form) {
+    form.reset();
+    const errorItems = form.querySelectorAll('.form__item-error');
+    errorItems.forEach((item) => (item.textContent = ''));
+    const errorInputs = form.querySelectorAll('.form__item_invalid');
+    errorInputs.forEach((input) => input.classList.remove('form__item_invalid'));
+}
 
 function closePopupWhenPressEsc(evt) {
     if (evt.key === 'Escape') {
@@ -33,6 +39,9 @@ function openPopup(popup) {
 }
 
 function closePopup(popup) {
+    document.removeEventListener('keydown', closePopupWhenPressEsc);
+    popup.classList.remove('popup_opened');
+    resetForm(popup.querySelector('.form')); // сбросить значения полей и ошибки заполнения
     document.removeEventListener('keydown', closePopupWhenPressEsc);
     popup.classList.remove('popup_opened');
 }
