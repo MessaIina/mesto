@@ -1,3 +1,6 @@
+import FormValidator from "./FormValidator.js";
+import initialCards from "./cards.js";
+
 const popups = document.querySelectorAll('.popup'); 
 const closeBtns = document.querySelectorAll('.popup__close-btn');
 const editBtn = document.querySelector('.profile__edit-btn');
@@ -17,14 +20,17 @@ const cardImage = imagePopup.querySelector('.card-zoom__image');
 const cardCaption = imagePopup.querySelector('.card-zoom__caption'); 
 const cardTemplate = document.querySelector('#card-template').content; 
 const cardsList = document.querySelector('.cards__list');
+
+const formNew = document.querySelector('.form_new');
+const formEdit = document.querySelector('.form_edit');
  
-function resetForm(form) {
-    form.reset();
-    const errorItems = form.querySelectorAll('.form__item-error');
-    errorItems.forEach((item) => (item.textContent = ''));
-    const errorInputs = form.querySelectorAll('.form__item_invalid');
-    errorInputs.forEach((input) => input.classList.remove('form__item_invalid'));
-}
+const validationConfig = {
+    inputSelector: '.form__item',
+    submitButtonSelector: '.form__submit-btn',
+    inactiveButtonClass: 'form__submit-btn_inactive',
+    inputErrorClass: 'form__item-error',
+    errorClass: 'form__item_invalid',
+};
 
 function closePopupWhenPressEsc(evt) {
     if (evt.key === 'Escape') {
@@ -32,20 +38,17 @@ function closePopupWhenPressEsc(evt) {
         closePopup(openedPopup);
     }
 }
-
+ 
 function openPopup(popup) {
     document.addEventListener('keydown', closePopupWhenPressEsc);
     popup.classList.add('popup_opened');
 }
-
+ 
 function closePopup(popup) {
     document.removeEventListener('keydown', closePopupWhenPressEsc);
-    popup.classList.remove('popup_opened');
-    resetForm(popup.querySelector('.form')); // сбросить значения полей и ошибки заполнения
-    document.removeEventListener('keydown', closePopupWhenPressEsc);
-    popup.classList.remove('popup_opened');
+    popup.classList.remove('popup_opened'); 
 }
-
+ 
 popups.forEach((popup) =>
     popup.addEventListener('mousedown', (evt) => {
         if (evt.target.classList.contains('popup')) {
@@ -93,34 +96,42 @@ function createCard(item) {
     return card;
 }
 
-initialCards.forEach(function (item) {
-    const card = createCard(item);
-    cardsList.append(card);
-});
-
-function handleProfileFormSubmit(evt) {
+function handleEditFormSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
     closePopup(profilePopup);
 }
+
 editBtn.addEventListener('click', () => {
     openPopup(profilePopup);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 });
 
-editForm.addEventListener('submit', handleProfileFormSubmit);
+editForm.addEventListener('submit', handleEditFormSubmit);
 
 function handleAddFormSubmit(evt) {
     evt.preventDefault();
     const card = createCard({ link: cardLink.value, name: cardName.value });
-    cardsList.prepend(card);
+    cardsList.prepend(card); 
     evt.target.reset();
     closePopup(cardPopup);
     evt.submitter.classList.add('form__submit-btn_inactive');
     evt.submitter.disabled = true;
 }
+
+initialCards.forEach(cardItem => {
+    const card = createCard(cardItem);
+    cardsList.append(card);
+});
+
+const formNewInstance = new FormValidator(formNew, validationConfig);
+
+const formEditInstance = new FormValidator(formEdit, validationConfig);
+
+formNewInstance.enableValidation();
+formEditInstance.enableValidation();
 
 addBtn.addEventListener('click', () => openPopup(cardPopup));
 addForm.addEventListener('submit', handleAddFormSubmit);
