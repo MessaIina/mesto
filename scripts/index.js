@@ -38,23 +38,21 @@ function closePopupWhenPressEsc(evt) {
         closePopup(openedPopup);
     }
 }
- 
+
 function openPopup(popup) {
-    document.addEventListener('keydown', closePopupWhenPressEsc); 
-    popup.classList.add('popup_opened'); 
+    document.addEventListener('keydown', closePopupWhenPressEsc);
+    popup.classList.add('popup_opened');
 }
- 
-function closePopup(popup) { 
+
+function closePopup(popup) {
     document.removeEventListener('keydown', closePopupWhenPressEsc);
     popup.classList.remove('popup_opened');
 }
- 
-popups.forEach((popup) => 
-    popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup')) {
-            closePopup(popup);
-        } 
-    }))
+popups.forEach((popup) => popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup')) {
+        closePopup(popup);
+    }
+}))
 
 closeBtns.forEach((btn) => {
     btn.addEventListener("click", () => closePopup(btn.closest(".popup")));
@@ -82,6 +80,8 @@ editBtn.addEventListener("click", () => {
 
 editForm.addEventListener("submit", handleProfileFormSubmit);
 
+const addFormValidator = new FormValidator(addForm, validationConfig);
+
 function handleAddFormSubmit(evt) {
     evt.preventDefault();
     const cardElement = new Card({
@@ -91,8 +91,8 @@ function handleAddFormSubmit(evt) {
     cardsList.prepend(cardElement);
     evt.target.reset();
     closePopup(cardPopup);
-    evt.submitter.classList.add("form__submit-btn_inactive");
-    evt.submitter.disabled = true;
+    addFormValidator.enableValidation();
+    addFormValidator.toggleSubmitButtonState();
 }
 
 initialCards.forEach(function(item) {
