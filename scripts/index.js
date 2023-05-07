@@ -41,18 +41,23 @@ function closePopupWhenPressEsc(evt) {
 
 function openPopup(popup) {
     document.addEventListener('keydown', closePopupWhenPressEsc);
+    popup.style.visibility = 'visible';
     popup.classList.add('popup_opened');
 }
 
 function closePopup(popup) {
     document.removeEventListener('keydown', closePopupWhenPressEsc);
     popup.classList.remove('popup_opened');
+    setTimeout(() => {
+      popup.style.removeProperty('visibility');
+    }, 200);
 }
+
 popups.forEach((popup) => popup.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup')) {
         closePopup(popup);
     }
-}))
+}));
 
 closeBtns.forEach((btn) => {
     btn.addEventListener("click", () => closePopup(btn.closest(".popup")));
