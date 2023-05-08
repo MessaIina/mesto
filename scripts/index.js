@@ -87,6 +87,8 @@ editForm.addEventListener("submit", handleProfileFormSubmit);
 
 const addFormValidator = new FormValidator(addForm, validationConfig);
 
+addFormValidator.enableValidation();
+
 function handleAddFormSubmit(evt) {
     evt.preventDefault();
     const cardElement = new Card({
@@ -96,7 +98,6 @@ function handleAddFormSubmit(evt) {
     cardsList.prepend(cardElement);
     evt.target.reset();
     closePopup(cardPopup);
-    addFormValidator.enableValidation();
     addFormValidator.toggleSubmitButtonState();
 }
 
