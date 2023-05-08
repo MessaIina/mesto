@@ -86,7 +86,6 @@ editBtn.addEventListener("click", () => {
 editForm.addEventListener("submit", handleProfileFormSubmit);
 
 const addFormValidator = new FormValidator(addForm, validationConfig);
-
 addFormValidator.enableValidation();
 
 function handleAddFormSubmit(evt) {
@@ -100,6 +99,8 @@ function handleAddFormSubmit(evt) {
     closePopup(cardPopup);
     addFormValidator.toggleSubmitButtonState();
 }
+ 
+  addForm.addEventListener("submit", handleAddFormSubmit);
 
 initialCards.forEach(function(item) {
     const cardElement = new Card(item, handleCardClick).generateCard();
@@ -113,4 +114,3 @@ formNewInstance.enableValidation();
 formEditInstance.enableValidation();
 
 addBtn.addEventListener("click", () => openPopup(cardPopup));
-addForm.addEventListener("submit", handleAddFormSubmit);
