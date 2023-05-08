@@ -63,13 +63,6 @@ closeBtns.forEach((btn) => {
     btn.addEventListener("click", () => closePopup(btn.closest(".popup"))); 
 });
  
-function handleProfileFormSubmit(evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-    closePopup(profilePopup);
-}
- 
 function handleCardClick(name, link) {
     cardImage.src = link;
     cardImage.alt = name;
@@ -82,8 +75,6 @@ editBtn.addEventListener("click", () => {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 });
- 
-editForm.addEventListener("submit", handleProfileFormSubmit);
 
 const addFormValidator = new FormValidator(addForm, validationConfig);
 
