@@ -21,8 +21,7 @@ const cardImage = imagePopup.querySelector(".card-zoom__image");
 const cardCaption = imagePopup.querySelector(".card-zoom__caption");
 const cardTemplate = document.querySelector("#card-template").content;
 const cardsList = document.querySelector(".cards__list");
-const formNew = document.querySelector('.form_new');
-const formEdit = document.querySelector('.form_edit');
+const form = document.querySelector('.form');
 
 const validationConfig = {
     inputSelector: '.form__item',
@@ -49,7 +48,7 @@ function closePopup(popup) {
     document.removeEventListener('keydown', closePopupWhenPressEsc);
     popup.classList.remove('popup_opened');
     setTimeout(() => {
-      popup.style.removeProperty('visibility');
+        popup.style.removeProperty('visibility');
     }, 200);
 }
 
@@ -62,13 +61,6 @@ popups.forEach((popup) => popup.addEventListener('mousedown', (evt) => {
 closeBtns.forEach((btn) => {
     btn.addEventListener("click", () => closePopup(btn.closest(".popup")));
 });
-
-function handleProfileFormSubmit(evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
-    closePopup(profilePopup);
-}
 
 function handleCardClick(name, link) {
     cardImage.src = link;
@@ -83,12 +75,18 @@ editBtn.addEventListener("click", () => {
     jobInput.value = profileJob.textContent;
 });
 
-editForm.addEventListener("submit", handleProfileFormSubmit);
+editForm.addEventListener("submit", evt => {
+    evt.preventDefault();
+    profileName.textContent = nameInput.value;
+    profileJob.textContent = jobInput.value;
+    closePopup(profilePopup);
+});
 
 const addFormValidator = new FormValidator(addForm, validationConfig);
+
 addFormValidator.enableValidation();
 
-function handleAddFormSubmit(evt) {
+addForm.addEventListener("submit", evt => {
     evt.preventDefault();
     const cardElement = new Card({
         name: cardName.value,
@@ -98,19 +96,15 @@ function handleAddFormSubmit(evt) {
     evt.target.reset();
     closePopup(cardPopup);
     addFormValidator.toggleSubmitButtonState();
-}
- 
-  addForm.addEventListener("submit", handleAddFormSubmit);
+});
 
-initialCards.forEach(function(item) {
+initialCards.forEach(item => {
     const cardElement = new Card(item, handleCardClick).generateCard();
     cardsList.append(cardElement);
 });
 
-const formNewInstance = new FormValidator(formNew, validationConfig);
-const formEditInstance = new FormValidator(formEdit, validationConfig);
+const formInstance = new FormValidator(form, validationConfig);
 
-formNewInstance.enableValidation();
-formEditInstance.enableValidation();
+formInstance.enableValidation();
 
 addBtn.addEventListener("click", () => openPopup(cardPopup));
