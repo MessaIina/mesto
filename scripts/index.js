@@ -20,8 +20,7 @@ const cardImage = imagePopup.querySelector(".card-zoom__image");
 const cardCaption = imagePopup.querySelector(".card-zoom__caption");
 const cardTemplate = document.querySelector("#card-template").content;
 const cardsList = document.querySelector(".cards__list");
-const formNew = document.querySelector('.form_new');
-const formEdit = document.querySelector('.form_edit');
+const formNew = document.querySelector('.form');
 const validationConfig = {
     inputSelector: '.form__item',
     submitButtonSelector: '.form__submit-btn',
@@ -76,9 +75,12 @@ editForm.addEventListener("submit", evt => {
     profileJob.textContent = jobInput.value;
     closePopup(profilePopup);
 });
+
 const addFormValidator = new FormValidator(addForm, validationConfig);
+ 
 addFormValidator.enableValidation();
-addForm.addEventListener("submit", evt => {
+
+function handleAddFormSubmit(evt) {
     evt.preventDefault();
     const cardElement = new Card({
         name: cardName.value,
@@ -88,13 +90,15 @@ addForm.addEventListener("submit", evt => {
     evt.target.reset();
     closePopup(cardPopup);
     addFormValidator.toggleSubmitButtonState();
-});
+}
+ 
+addForm.addEventListener("submit", handleAddFormSubmit);
+
 initialCards.forEach(item => {
     const cardElement = new Card(item, handleCardClick).generateCard();
     cardsList.append(cardElement);
 });
 const formNewInstance = new FormValidator(formNew, validationConfig);
-const formEditInstance = new FormValidator(formEdit, validationConfig);
+
 formNewInstance.enableValidation();
-formEditInstance.enableValidation();
 addBtn.addEventListener("click", () => openPopup(cardPopup));
