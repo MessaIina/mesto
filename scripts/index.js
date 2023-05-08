@@ -38,7 +38,7 @@ function closePopupWhenPressEsc(evt) {
         closePopup(openedPopup);
     }
 }
-
+ 
 function openPopup(popup) {
     document.addEventListener('keydown', closePopupWhenPressEsc);
     popup.style.visibility = 'visible';
@@ -49,39 +49,41 @@ function closePopup(popup) {
     document.removeEventListener('keydown', closePopupWhenPressEsc);
     popup.classList.remove('popup_opened');
     setTimeout(() => {
-        popup.style.removeProperty('visibility');
+      popup.style.removeProperty('visibility');
     }, 200);
 }
 
-popups.forEach((popup) => popup.addEventListener('mousedown', (evt) => {
+popups.forEach((popup) => popup.addEventListener('mousedown', (evt) => { 
     if (evt.target.classList.contains('popup')) {
         closePopup(popup);
     }
 }));
-
+ 
 closeBtns.forEach((btn) => {
-    btn.addEventListener("click", () => closePopup(btn.closest(".popup")));
+    btn.addEventListener("click", () => closePopup(btn.closest(".popup"))); 
 });
-
-function handleCardClick(name, link) {
-    cardImage.src = link;
-    cardImage.alt = name;
-    cardCaption.textContent = name;
-    openPopup(imagePopup);
-}
-
-editBtn.addEventListener("click", () => {
-    openPopup(profilePopup);
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-});
-
-editForm.addEventListener("submit", evt => {
+ 
+function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
     closePopup(profilePopup);
+}
+ 
+function handleCardClick(name, link) {
+    cardImage.src = link;
+    cardImage.alt = name;
+    cardCaption.textContent = name;
+    openPopup(imagePopup); 
+}
+ 
+editBtn.addEventListener("click", () => {
+    openPopup(profilePopup); 
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileJob.textContent;
 });
+ 
+editForm.addEventListener("submit", handleProfileFormSubmit);
 
 const addFormValidator = new FormValidator(addForm, validationConfig);
 
