@@ -60,11 +60,11 @@ class FormValidator {
     }
     resetValidation() {
         this._formsInputs.forEach((input) => {
-            this._hideInputError(input);
-            input.value = '';
+          this._hideInputError(input);
         });
+        this._form.reset();
         this._enableSubmitButton();
         this.toggleSubmitButtonState();
-    }
+      }
 }
 export default FormValidator;

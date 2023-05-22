@@ -57,7 +57,6 @@ const popupWithFormNew = new PopupWithForm(".card-popup", {
         const cardElement = createCard(newCardData);
         cardList.addItem(cardElement);
         popupWithFormNew.close();
-        formValidatorNew.resetValidation();
     }
 });
 
@@ -85,6 +84,7 @@ editBtn.addEventListener("click", () => {
 });
 
 addBtn.addEventListener("click", () => {
+    formValidatorNew.resetValidation();
     popupWithFormNew.open();
 });
 
