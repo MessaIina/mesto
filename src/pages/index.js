@@ -29,7 +29,9 @@ import {
   deleteForm,
   cardListSelector,
   profileNameSelector,
-  profileJobSelector
+  profileJobSelector,
+  avatarEditBtn,
+  formAvatar
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
 
@@ -50,6 +52,7 @@ let cardList;
  
 const formValidatorEdit = new FormValidator(formEdit, validationConfig); 
 const formValidatorNew = new FormValidator(formNew, validationConfig); 
+const formValidatorAvatar = new FormValidator(formAvatar, validationConfig);
  
 const popupWithFormEdit = new PopupWithForm(".profile-popup", { 
     onSubmit: (formData) => { 
@@ -60,6 +63,30 @@ const popupWithFormEdit = new PopupWithForm(".profile-popup", {
 }); 
  
 popupWithFormEdit.setEventListeners(); 
+
+const popupWithFormAvatar = new PopupWithForm('.avatar-popup', {
+    onSubmit: (formData) => {
+        popupWithFormAvatar.renderLoading(true);
+        api
+            .setUserAvatar(formData.link)
+            .then((res) => {
+                userInfo.avatarLink = res.avatar;
+                userInfo.setUserAvatar(userInfo.avatarLink);
+                popupWithFormAvatar.close();
+                formValidatorAvatar.resetValidation();
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(() => {
+                popupWithFormAvatar.renderLoading(false);
+                popupWithFormAvatar.close();
+            });
+            
+    }
+});
+
+popupWithFormAvatar.setEventListeners();
  
 const popupWithFormNew = new PopupWithForm(".card-popup", {
   onSubmit: (data) => {
@@ -122,6 +149,11 @@ addBtn.addEventListener("click", () => {
     formValidatorNew.resetValidation(); 
     popupWithFormNew.open(); 
 }); 
+
+avatarEditBtn.addEventListener('click', () => {
+    formValidatorAvatar.resetValidation();
+    popupWithFormAvatar.open();
+});
  
 const popupWithImage = new PopupWithImage(".image-popup"); 
  
@@ -133,3 +165,4 @@ function handleCardClick(data) {
  
 formValidatorEdit.enableValidation(); 
 formValidatorNew.enableValidation(); 
+formValidatorAvatar.enableValidation();
