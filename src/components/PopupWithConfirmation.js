@@ -7,12 +7,11 @@ export default class PopupWithConfirmation extends Popup {
     this._form = this._popup.querySelector('.form');
   }
 
-  // Публичный метод для добавления обработчиков событий на элементы попапа
-  setEventListeners(cardData) {
+  setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', evt => {
       evt.preventDefault();
-      this._handleSubmit(cardData);
+      this._handleSubmit();
     });
   }
 }

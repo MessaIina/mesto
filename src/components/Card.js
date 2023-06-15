@@ -40,7 +40,7 @@ class Card {
           this._handleLikeIcon();
       });
       this._deleteBtn.addEventListener('click', () => {
-        this._deleteCard(this.id);
+        this.deleteCard(this.id);
         this._handleDeleteCard();
       });
       this._cardImage.addEventListener('click', () => {

@@ -43,8 +43,8 @@
           <div class="form__input-container">
             <input class="form__item form__item-type-name" id="name" name="name" type="text" placeholder="Имя" minlength="2" maxlength="40" required/>
             <span class="form__item-error form__item-type-name-error" id="name-error"></span>
-            <input class="form__item form__item-type-job" id="job" name="job" type="text" placeholder="О себе" minlength="2" maxlength="200" required/>
-            <span class="form__item-error form__item-type-job-error" id="job-error"></span>
+            <input class="form__item form__item-type-job" id="about" name="about" type="text" placeholder="О себе" minlength="2" maxlength="200" required/>
+            <span class="form__item-error form__item-type-job-error" id="about-error"></span>
           </div>
           <button type="submit" class="form__submit-btn">Сохранить</button>
         </form>
@@ -92,7 +92,7 @@
         <button type="button" class="popup__close-btn"></button>
         <form class="form form_delete" id="delete" novalidate>
           <h2 class="popup__heading">Вы уверены?</h2>
-          <button type="submit" class="form__submit-btn">Да</button>
+          <button type="submit" class="form__submit-btn form__delete-btn">Да</button>
         </form>
       </div>
   </section>

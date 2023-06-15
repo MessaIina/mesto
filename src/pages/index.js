@@ -14,7 +14,7 @@ import {
   profilePopup,
   editForm,
   nameInput,
-  jobInput,
+  aboutInput,
   addBtn,
   cardPopup,
   addForm,
@@ -29,11 +29,14 @@ import {
   deleteForm,
   cardListSelector,
   profileNameSelector,
-  profileJobSelector,
+  profileAboutSelector,
   avatarEditBtn,
-  formAvatar
+  formAvatar,
+  avatarImg,
+  deleteButton
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
+// import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 const api = new Api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
@@ -43,10 +46,11 @@ const api = new Api({
     }
   });
   
-  const userInfo = new UserInfo({ 
-    nameSelector: ".profile__name", 
-    jobSelector: ".profile__about", 
-}); 
+  const userInfo = new UserInfo({
+    nameSelector: ".profile__name",
+    aboutSelector: ".profile__about",
+    avatarSelector: ".profile__avatar"
+  });
 
 let cardList;
  
@@ -56,10 +60,23 @@ const formValidatorAvatar = new FormValidator(formAvatar, validationConfig);
  
 const popupWithFormEdit = new PopupWithForm(".profile-popup", { 
     onSubmit: (formData) => { 
-        userInfo.setUserInfo(formData); 
-        popupWithFormEdit.close() 
-        formValidatorEdit.resetValidation();
-    } 
+        popupWithFormAvatar.renderLoading(true);
+        api
+        .setUserInfo(formData)
+        .then((res) => {
+            userInfo.setUserInfo(res),
+            popupWithFormEdit.close();
+            formValidatorEdit.resetValidation();
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(() => {
+                popupWithFormEdit.renderLoading(false);
+            });
+            
+    }
+
 }); 
  
 popupWithFormEdit.setEventListeners(); 
@@ -68,10 +85,9 @@ const popupWithFormAvatar = new PopupWithForm('.avatar-popup', {
     onSubmit: (formData) => {
         popupWithFormAvatar.renderLoading(true);
         api
-            .setUserAvatar(formData.link)
+            .setUserAvatar(formData.avatar)
             .then((res) => {
-                userInfo.avatarLink = res.avatar;
-                userInfo.setUserAvatar(userInfo.avatarLink);
+                userInfo.setUserAvatar(res.avatar);
                 popupWithFormAvatar.close();
                 formValidatorAvatar.resetValidation();
             })
@@ -80,7 +96,6 @@ const popupWithFormAvatar = new PopupWithForm('.avatar-popup', {
             })
             .finally(() => {
                 popupWithFormAvatar.renderLoading(false);
-                popupWithFormAvatar.close();
             });
             
     }
@@ -138,10 +153,10 @@ api.getInitialCards()
   .catch((err) => {
       console.log(err);
   });
- 
+
 editBtn.addEventListener("click", () => { 
   nameInput.value = document.querySelector('.profile__name').textContent; 
-  jobInput.value = document.querySelector('.profile__about').textContent; 
+  aboutInput.value = document.querySelector('.profile__about').textContent; 
   popupWithFormEdit.open(); 
 }); 
  
