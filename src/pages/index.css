@@ -30,7 +30,7 @@
 @import url(../blocks/card/__like-btn/card__like-btn.css);
 @import url(../blocks/card/__like-btn/_liked/card__like-btn_liked.css);
 @import url(../blocks/card/__delete-btn/card__delete-btn.css);
-@import url(../blocks/card/__delete-btn_visible/card__delete-btn_visible.css);
+@import url(../blocks/card/__delete-btn/_hidden/card__delete-btn_hidden.css);
 @import url(../blocks/card/__like-counter/card__like-counter.css);
 @import url(../blocks/card/__likes-container/card__likes-container.css);
 

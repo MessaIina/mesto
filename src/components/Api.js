@@ -84,7 +84,7 @@ class Api {
   }
 
   likeCard(id) {
-    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this._headers,
     })
@@ -95,7 +95,7 @@ class Api {
   }
 
   dislikeCard(id) {
-    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers,
     })

@@ -13,7 +13,7 @@ export default class UserInfo {
       };
     }
     
-    setUserInfo({ name, about }) {
+    setUserInfo(name, about) {
       if (name) {
         this._nameElement.textContent = name;
       }
@@ -26,5 +26,9 @@ export default class UserInfo {
       if (avatar) {
         this._avatarElement.src = avatar;
       }
+    }
+
+    setId(user) {
+      this.userId = user._id;
     }
   }
