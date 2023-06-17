@@ -36,7 +36,7 @@ class Card {
     this._likeButton = this._element.querySelector('.card__like-btn');
     this._likeCounter = this._element.querySelector('.card__like-counter');
     this._deleteBtn = this._element.querySelector('.card__delete-btn');
-    
+    this._setEventListeners();
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._element.querySelector('.card__name').textContent = this._name;
@@ -45,7 +45,7 @@ class Card {
       this._hideDeleteButton();
       this._setPreLike();
     }
-    this._setEventListeners();
+    
     return this._element;
 }
   
@@ -54,7 +54,7 @@ class Card {
           this._handleLikeIcon();
       });
       this._deleteBtn.addEventListener('click', () => {
-        this._handleDeleteClick(this._id);
+        this._handleDeleteClick(this);
       });
       this._cardImage.addEventListener('click', () => {
           this._handleCardClick({

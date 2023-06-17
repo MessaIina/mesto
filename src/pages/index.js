@@ -7,33 +7,14 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import {
   validationConfig,
-  imagePopup,
-  cardImage,
-  cardCaption,
   editBtn,
-  profilePopup,
-  editForm,
   nameInput,
   aboutInput,
   addBtn,
-  cardPopup,
-  addForm,
-  cardName,
-  cardLink,
   formNew,
   formEdit,
-  avatarPopup,
-  avatarForm,
-  avatarInput,
-  deletePopup,
-  deleteForm,
-  cardListSelector,
-  profileNameSelector,
-  profileAboutSelector,
   avatarEditBtn,
   formAvatar,
-  avatarImg,
-  deleteButton
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
@@ -161,9 +142,13 @@ const popupWithFormNew = new PopupWithForm(".card-popup", {
                         name: data.name,
                         link: data.link,
                         caption: data.caption,
-                        id: data._id
+                        _id: data._id
                     },
-                    handleCardClick
+                    handleCardClick,
+                    data.owner._id,
+                    handleDeleteClick, 
+                    handleLikeCard, 
+                    handleDislikeCard
                 );
                 const newCardElement = newCard.generateCard();
                 cardList.addItem(newCardElement);
@@ -201,6 +186,7 @@ api.getInitialCards()
   });
 
 editBtn.addEventListener("click", () => { 
+  formValidatorEdit.resetValidation();
   nameInput.value = document.querySelector('.profile__name').textContent; 
   aboutInput.value = document.querySelector('.profile__about').textContent; 
   popupWithFormEdit.open(); 
