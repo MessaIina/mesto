@@ -3,7 +3,7 @@
     height: 120px;
     overflow: hidden;
     position: relative;
-    width: 120px
+    width: 120px;
 }
 
 .profile__container-avatar:before {
@@ -12,5 +12,5 @@
     left: 0;
     position: absolute;
     top: 0;
-    width: 100%
+    width: 100%;
 }
