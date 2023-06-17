@@ -11,10 +11,6 @@ class PopupWithConfirmation extends Popup {
     open(card) {
         this._card = card;
         super.open();
-        this._form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            this._handleSubmitCallback();
-        });
     }
     close() {
         super.close();
@@ -22,7 +18,7 @@ class PopupWithConfirmation extends Popup {
     }
     setEventListeners() {
         super.setEventListeners();
-        this._submitButton.addEventListener('click', (evt) => {
+        this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._handleSubmitCallback(this._card);
         });

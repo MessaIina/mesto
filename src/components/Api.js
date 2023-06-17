@@ -16,6 +16,13 @@ class Api {
           return Promise.reject(err);
       });
   }
+  getUserAvatar() {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+        headers: this._headers
+    }).then(this._handleResponse).catch(err => {
+        return Promise.reject(err);
+    });
+}
   getInitialCards() {
       return fetch(`${this._baseUrl}/cards`, {
           headers: this._headers

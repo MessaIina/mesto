@@ -14,9 +14,9 @@ class Card {
       this._element = this._getTemplate();
       this._cardImage = this._element.querySelector('.card__image');
       this._likeButton = this._element.querySelector('.card__like-btn');
-      this._likeCounter = this._element.querySelector('.card__like-counter');
+      this.likeCounter = this._element.querySelector('.card__like-counter');
       this._deleteBtn = this._element.querySelector('.card__delete-btn');
-      this._numberLikes = data.likes === undefined ? 0 : data.likes.length;;
+      this.numberLikes = data.likes === undefined ? 0 : data.likes.length;;
   }
   _getTemplate() {
       const cardElement = document.querySelector('#card-template').content.querySelector('.card').cloneNode(true);
@@ -31,13 +31,13 @@ class Card {
       this._element = this._getTemplate(this._cardSelector);
       this._cardImage = this._element.querySelector('.card__image');
       this._likeButton = this._element.querySelector('.card__like-btn');
-      this._likeCounter = this._element.querySelector('.card__like-counter');
+      this.likeCounter = this._element.querySelector('.card__like-counter');
       this._deleteBtn = this._element.querySelector('.card__delete-btn');
       this._setEventListeners();
       this._cardImage.src = this._link;
       this._cardImage.alt = this._name;
       this._element.querySelector('.card__name').textContent = this._name;
-      this._likeCounter.textContent = this._numberLikes;
+      this.likeCounter.textContent = this.numberLikes;
       if (this._owner) {
           this._hideDeleteButton();
           this._setPreLike();
@@ -74,7 +74,7 @@ class Card {
           this._dislikeCard(this);
       }
   }
-  _handleDeleteCard() {
+  handleCardDelete() {
       this._element.remove();
       this._element = null;
   }

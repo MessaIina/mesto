@@ -15,6 +15,8 @@ import {
     formEdit,
     avatarEditBtn,
     formAvatar,
+    profileNameSelector, 
+    profileAboutSelector
 }
 from "../utils/constants.js";
 import Api from "../components/Api.js";
@@ -30,14 +32,19 @@ const userInfo = new UserInfo({
     nameSelector: ".profile__name",
     aboutSelector: ".profile__about",
     avatarSelector: ".profile__avatar",
-    userId: ""
+    userId: "" 
 });
+ 
 api.getUserInfo().then(values => {
     userInfo.setUserInfo(values.name, values.about);
     userInfo.setUserAvatar(values.avatar);
     userInfo.setId(values);
 })
+
 let cardList;
+const nameElement = document.querySelector(profileNameSelector);
+const aboutElement = document.querySelector(profileAboutSelector);
+
 const formValidatorEdit = new FormValidator(formEdit, validationConfig);
 const formValidatorNew = new FormValidator(formNew, validationConfig);
 const formValidatorAvatar = new FormValidator(formAvatar, validationConfig);
@@ -81,7 +88,7 @@ function handleDeleteClick(data) {
 
 function handleDeleteCard(card) {
     api.deleteCard(card._id).then(() => {
-        card._handleDeleteCard();
+        card.handleCardDelete();
     }).catch((err) => {
         console.log(err);
     }).finally(() => {
@@ -91,21 +98,21 @@ function handleDeleteCard(card) {
 
 function handleLikeCard(card) {
     api.likeCard(card._id).then((data) => {
-        card._numberLikes = data.likes.length;
-        card._likeCounter.textContent = card._numberLikes;
+      card.numberLikes = data.likes.length;
+      card.likeCounter.textContent = card.numberLikes;
     }).catch((err) => {
-        console.log(err);
-    })
-}
+      console.log(err);
+    });
+  }
 
-function handleDislikeCard(card) {
+  function handleDislikeCard(card) {
     api.dislikeCard(card._id).then((data) => {
-        card._numberLikes = data.likes.length;
-        card._likeCounter.textContent = card._numberLikes;
+      card.numberLikes = data.likes.length;
+      card.likeCounter.textContent = card.numberLikes;
     }).catch((err) => {
-        console.log(err);
-    })
-}
+      console.log(err);
+    });
+  }
 const popupWithFormNew = new PopupWithForm(".card-popup", {
     onSubmit: (data) => {
         api.createCard({
@@ -134,25 +141,34 @@ function createCard(data) {
     const card = new Card(data, handleCardClick, userInfo.userId, handleDeleteClick, handleLikeCard, handleDislikeCard);
     return card.generateCard();
 }
-api.getInitialCards().then((cards) => {
-    cardList = new Section({
-        items: cards,
-        renderer: (item) => {
-            const cardElement = createCard(item);
-            cardList.addItem(cardElement);
-        },
-    }, '.cards__list');
-    cardList.renderItems();
-}).catch((err) => {
-    console.log(err);
-});
-editBtn.addEventListener("click", () => {
+ 
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+    .then(([userData, cardsData]) => {
+        const userId = userData._id;
+        userInfo.setUserAvatar(userData.avatar);
+        userInfo.setUserInfo(userData.name, userData.about);
+        
+        cardList = new Section({
+            items: cardsData.reverse(),
+            renderer: (item) => {
+                const cardElement = createCard(item, userId);
+                cardList.addItem(cardElement);
+            },
+        }, '.cards__list'); 
+        cardList.renderItems(); 
+    })
+    .catch((err) => { 
+        console.log(err); 
+    });
+  
+  function handleEditProfile() {
     formValidatorEdit.resetValidation();
-    nameInput.value = document.querySelector('.profile__name').textContent;
-    aboutInput.value = document.querySelector('.profile__about').textContent;
+    nameInput.value = nameElement.textContent;
+    aboutInput.value = aboutElement.textContent;
     popupWithFormEdit.open();
-});
-addBtn.addEventListener("click", () => {
+  }
+  editBtn.addEventListener('click', handleEditProfile);
+  addBtn.addEventListener("click", () => {
     formValidatorNew.resetValidation();
     popupWithFormNew.open();
 });
