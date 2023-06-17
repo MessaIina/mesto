@@ -109,46 +109,15 @@ const popupWithFormAvatar = new PopupWithForm('.avatar-popup', {
 });
 
 popupWithFormAvatar.setEventListeners();
- 
-const popupWithFormNew = new PopupWithForm(".card-popup", {
-  onSubmit: (data) => {
-      api
-          .createCard({
-              name: data.place,
-              link: data.link,
-          })
-          .then((data) => {
-              const newCard = new Card({
-                      name: data.name,
-                      link: data.link,
-                      caption: data.caption,
-                      id: data._id
-                  },
-                  handleCardClick
-              );
-              const newCardElement = newCard.generateCard();
-              cardList.addItem(newCardElement);
-          })
-          .catch((err) => {
-              console.log(err);
-          })
-          .finally(() => {
-              popupWithFormNew.renderLoading(false);
-              popupWithFormNew.close();
-          });
-  },
-});
-
-popupWithFormNew.setEventListeners();
 
 function handleDeleteClick(data) { 
     deletePopupImg.open(data); 
 } 
 
 function handleDeleteCard(card) {
-    api.deleteCard(card._id)
+    api.deleteCard(card)
     .then(() => {
-        card._handleHideCard();
+        card._handleDeleteCard();
     })
     .catch((err) => {
         console.log(err);
@@ -179,6 +148,37 @@ function handleDislikeCard(card) {
         console.log(err);
     })
 }
+
+const popupWithFormNew = new PopupWithForm(".card-popup", {
+    onSubmit: (data) => {
+        api
+            .createCard({
+                name: data.place,
+                link: data.link,
+            })
+            .then((data) => {
+                const newCard = new Card({
+                        name: data.name,
+                        link: data.link,
+                        caption: data.caption,
+                        id: data._id
+                    },
+                    handleCardClick
+                );
+                const newCardElement = newCard.generateCard();
+                cardList.addItem(newCardElement);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(() => {
+                popupWithFormNew.renderLoading(false);
+                popupWithFormNew.close();
+            });
+    },
+  });
+  
+  popupWithFormNew.setEventListeners();
 
 function createCard(data) {
   const card = new Card(data, handleCardClick, userInfo.userId, handleDeleteClick, handleLikeCard, handleDislikeCard);
@@ -222,7 +222,8 @@ popupWithImage.setEventListeners();
  
 function handleCardClick(data) { 
     popupWithImage.open(data); 
-} 
+}
+
 const deletePopupImg = new PopupWithConfirmation(".delete-popup");
 deletePopupImg.setSubmitAction(handleDeleteCard);
 deletePopupImg.setEventListeners();

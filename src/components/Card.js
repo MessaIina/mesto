@@ -82,7 +82,7 @@ class Card {
       }
   }
   
-  _handleHideCard() {
+  _handleDeleteCard() {
       this._element.remove();
       this._element = null;
   }
