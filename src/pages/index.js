@@ -87,7 +87,7 @@ function handleDeleteClick(data) {
 }
 
 function handleDeleteCard(card) {
-    api.deleteCard(card._id).then(() => {
+    api.deleteCard(card.id).then(() => {
         card.handleCardDelete();
     }).catch((err) => {
         console.log(err);
@@ -97,7 +97,7 @@ function handleDeleteCard(card) {
 }
 
 function handleLikeCard(card) {
-    api.likeCard(card._id).then((data) => {
+    api.likeCard(card.id).then((data) => {
       card.numberLikes = data.likes.length;
       card.likeCounter.textContent = card.numberLikes;
     }).catch((err) => {
@@ -106,7 +106,7 @@ function handleLikeCard(card) {
   }
 
   function handleDislikeCard(card) {
-    api.dislikeCard(card._id).then((data) => {
+    api.dislikeCard(card.id).then((data) => {
       card.numberLikes = data.likes.length;
       card.likeCounter.textContent = card.numberLikes;
     }).catch((err) => {
@@ -137,8 +137,8 @@ const popupWithFormNew = new PopupWithForm(".card-popup", {
 });
 popupWithFormNew.setEventListeners();
 
-function createCard(data) {
-    const card = new Card(data, handleCardClick, userInfo.userId, handleDeleteClick, handleLikeCard, handleDislikeCard);
+function createCard(data, userId) {
+    const card = new Card(data, handleCardClick, userId, handleDeleteClick, handleLikeCard, handleDislikeCard);
     return card.generateCard();
 }
  

@@ -1,6 +1,6 @@
 class Card {
   constructor(data, handleCardClick, userId, handleDeleteClick, likeCard, dislikeCard) {
-      this._id = data._id;
+      this.id = data._id;
       this._name = data.name;
       this._link = data.link;
       this._caption = data.caption;
