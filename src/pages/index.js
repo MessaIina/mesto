@@ -34,12 +34,6 @@ const userInfo = new UserInfo({
     avatarSelector: ".profile__avatar",
     userId: "" 
 });
- 
-api.getUserInfo().then(values => {
-    userInfo.setUserInfo(values.name, values.about);
-    userInfo.setUserAvatar(values.avatar);
-    userInfo.setId(values);
-})
 
 let cardList;
 const nameElement = document.querySelector(profileNameSelector);
@@ -147,7 +141,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
         const userId = userData._id;
         userInfo.setUserAvatar(userData.avatar);
         userInfo.setUserInfo(userData.name, userData.about);
-        
+        userInfo.setId(userData);
         cardList = new Section({
             items: cardsData.reverse(),
             renderer: (item) => {
