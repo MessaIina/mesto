@@ -4,17 +4,24 @@
 Сервис Mesto: интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки. Выполнен по брифу от Яндекс.Практикума, в рамках проектной работы №4.
 
 **Технологии создания сайта**
-* HTML CSS
-* Методология БЭМ
-* Файловая структура Nested БЭМ
-* Адаптивный дизайн, реализуемый с помощью медиа-запросов
-* Использование popup и JavaScript  
-
-**Figma**
-
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-
-**GitHub**
-
-* [Ссылка на GitHub](https://messaiina.github.io/mesto/)
-
+* HTML 
+* CSS3:
+* Flexbox;
+* Grid Layout;
+* Positioning;
+* Adaptive UI;
+* Media Queries;
+* Методология БЭМ;
+* Фйловая структура Nested БЭМ;
+* JavaScript:
+* Стиль CamelCase;
+* Объектно-ориентированное программирование;
+* Промисы (Promise);
+* Асинхронность и оптимизация;
+* API (Application Programming Interface);
+* Webpack;
+* React JS:
+* Create React App;
+* Портирование разметки в JSX;
+* Функциональные компоненты;
+* Хуки.
